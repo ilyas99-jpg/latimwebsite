@@ -1,0 +1,228 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Luxury Indoor Jacuzzi Suite",
+      "category": "spa",
+      "image": "images/spa-jacuzzi-1.jpg",
+      "description": "Spa & Jacuzzi"
+    },
+    {
+      "id": 2,
+      "title": "Sauna & Steam Room Combination",
+      "category": "spa",
+      "image": "images/spa-sauna-steam.jpg",
+      "description": "Spa & Jacuzzi"
+    },
+    {
+      "id": 3,
+      "title": "Frameless Glass Shower & Freestanding Bath",
+      "category": "bathroom",
+      "image": "images/bathroom-shower-bath-1.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 4,
+      "title": "Wall-Hung Vanity — Marble Finish",
+      "category": "bathroom",
+      "image": "images/bathroom-vanity-stone.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 5,
+      "title": "Luxury Marble Vanity Counter Suite",
+      "category": "bathroom",
+      "image": "images/bathroom-vanity-marble.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 6,
+      "title": "Freestanding Bathtub Installation",
+      "category": "bathroom",
+      "image": "images/bathroom-bathtub-1.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 7,
+      "title": "Designer Vessel Sink Vanity",
+      "category": "bathroom",
+      "image": "images/bathroom-vanity-pink.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 8,
+      "title": "Glass Shower System — Residence",
+      "category": "bathroom",
+      "image": "images/bathroom-shower-install.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 9,
+      "title": "Whirlpool Bath & Wall-Hung WC Suite",
+      "category": "bathroom",
+      "image": "images/bathroom-whirlpool.jpg",
+      "description": "Luxury Bathroom"
+    },
+    {
+      "id": 10,
+      "title": "Contemporary Floating Vanity",
+      "category": "bathroom",
+      "image": "images/bathroom-vanity-dark.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 11,
+      "title": "Marble Vessel Sink Vanity",
+      "category": "bathroom",
+      "image": "images/bathroom-vanity-marble-vessel.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 12,
+      "title": "Double Basin Luxury Vanity",
+      "category": "bathroom",
+      "image": "images/bathroom-double-basin.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 13,
+      "title": "Round Vessel Sink & Feature Wall",
+      "category": "bathroom",
+      "image": "images/bathroom-round-sink.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 14,
+      "title": "Premium Marble Counter — Detail",
+      "category": "bathroom",
+      "image": "images/bathroom-counter-closeup.jpg",
+      "description": "Bathroom Installations"
+    },
+    {
+      "id": 15,
+      "title": "Pedrollo Pump — Roof Space Install",
+      "category": "plumbing",
+      "image": "images/water-pump-dayliff.jpg",
+      "description": "Plumbing Engineering"
+    },
+    {
+      "id": 16,
+      "title": "Dayliff Pump & Tank Setup",
+      "category": "plumbing",
+      "image": "images/water-pump-dayliff.jpg",
+      "description": "Plumbing Engineering"
+    },
+    {
+      "id": 17,
+      "title": "Hot Water Pressure & Circulation System",
+      "category": "plumbing",
+      "image": "images/water-pressure-system.jpg",
+      "description": "Water Engineering"
+    },
+    {
+      "id": 18,
+      "title": "Solar Boiler Plumbing — Night Installation",
+      "category": "plumbing",
+      "image": "images/plumbing-boiler-night.jpg",
+      "description": "Plumbing Engineering"
+    },
+    {
+      "id": 19,
+      "title": "Commercial Triple-Pump Water System",
+      "category": "water",
+      "image": "images/water-pump-triple.jpg",
+      "description": "Water Engineering"
+    },
+    {
+      "id": 20,
+      "title": "Milano Solar Water Heater — Jinja",
+      "category": "water",
+      "image": "images/solar-milano.jpg",
+      "description": "Solar Water Heating"
+    },
+    {
+      "id": 21,
+      "title": "Powertrac Solar Heater Installation",
+      "category": "water",
+      "image": "images/solar-powertrac.jpg",
+      "description": "Solar Water Heating"
+    },
+    {
+      "id": 22,
+      "title": "Megasun Solar System — Residential",
+      "category": "water",
+      "image": "images/solar-megasun.jpg",
+      "description": "Solar Water Heating"
+    },
+    {
+      "id": 23,
+      "title": "Chloride Solar Heater — 65% Energy Saving",
+      "category": "water",
+      "image": "images/solar-chloride.jpg",
+      "description": "Solar Water Heating"
+    },
+    {
+      "id": 24,
+      "title": "Solar Heater Assembly & Pre-Installation",
+      "category": "water",
+      "image": "images/solar-chloride-install.jpg",
+      "description": "Solar Water Heating"
+    },
+    {
+      "id": 25,
+      "title": "Multi-Unit Solar Heater Array",
+      "category": "water",
+      "image": "images/solar-multi-array.jpg",
+      "description": "Solar Water Heating"
+    },
+    {
+      "id": 26,
+      "title": "Solar Heater Roof Installation",
+      "category": "water",
+      "image": "images/solar-roof-install.jpg",
+      "description": "Solar Water Heating"
+    },
+    {
+      "id": 27,
+      "title": "Fire Suppression Pump System",
+      "category": "water",
+      "image": "images/water-fire-pumps.jpg",
+      "description": "Fire & Water Engineering"
+    },
+    {
+      "id": 28,
+      "title": "Fire Hose Reel Installation",
+      "category": "water",
+      "image": "images/water-fire-hose.jpg",
+      "description": "Fire Suppression"
+    },
+    {
+      "id": 30,
+      "title": "32-Camera System — Office Complex",
+      "category": "cctv",
+      "image": "images/cctv camera.jpeg",
+      "description": "CCTV Installation"
+    },
+    {
+      "id": 31,
+      "title": "Aluminium Window & Glass System",
+      "category": "fabrication",
+      "image": "images/almuniamgGlass.jpeg",
+      "description": "Aluminium Fabrication"
+    },
+    {
+      "id": 32,
+      "title": "Multi-Split AC System — Office Block",
+      "category": "ac",
+      "image": "images/AC.jpeg",
+      "description": "Air Conditioning"
+    },
+    {
+      "id": 1776951232881,
+      "title": "Residential Complex — Jinja City",
+      "category": "civil",
+      "image": "images/builing.jpg.jpeg",
+      "description": "Civil engineering"
+    }
+  ]
+}

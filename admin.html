@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latimtech — Project Manager</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #1A365D;
+      --gold:    #D4A574;
+      --green:   #2D7A52;
+      --red:     #C0392B;
+      --bg:      #F0F2F5;
+      --white:   #FFFFFF;
+      --border:  #DDE1E7;
+      --text:    #333;
+      --muted:   #6B7280;
+      --radius:  10px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: var(--navy);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .header h1 { font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .header h1 span { color: var(--gold); }
+    .header-links { display: flex; gap: .75rem; }
+    .header-links a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: .85rem;
+      padding: .35rem .75rem;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 6px;
+      transition: all .2s;
+    }
+    .header-links a:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+    /* ── Layout ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem;
+    }
+    @media(max-width:860px) { .layout { grid-template-columns: 1fr; } }
+
+    /* ── Card ── */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1.25rem;
+      padding-bottom: .75rem;
+      border-bottom: 2px solid var(--bg);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .card-title .badge {
+      background: var(--navy);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .2rem .5rem;
+      border-radius: 20px;
+    }
+
+    /* ── Form ── */
+    .form-group { margin-bottom: 1rem; }
+    label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: .35rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: .65rem .9rem;
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      font-size: .95rem;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color .2s, box-shadow .2s;
+      font-family: inherit;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(26,54,93,.1);
+    }
+    input.error { border-color: var(--red); }
+    textarea { resize: vertical; min-height: 75px; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .65rem 1.25rem;
+      border-radius: 7px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all .2s;
+      font-family: inherit;
+    }
+    .btn-primary  { background: var(--green);  color: #fff; }
+    .btn-primary:hover  { background: #1F5A3A; }
+    .btn-navy    { background: var(--navy);   color: #fff; }
+    .btn-navy:hover    { background: #0D1F35; }
+    .btn-gold    { background: var(--gold);   color: var(--navy); }
+    .btn-gold:hover    { opacity: .9; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--navy); color: var(--navy); }
+    .btn-danger  { background: #FEE2E2; color: var(--red); }
+    .btn-danger:hover  { background: var(--red); color: #fff; }
+    .btn-full { width: 100%; justify-content: center; }
+    .btn-sm { padding: .35rem .7rem; font-size: .8rem; }
+
+    /* ── Action Bar ── */
+    .action-bar {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Project List ── */
+    .project-list { display: flex; flex-direction: column; gap: .6rem; }
+
+    .project-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: .75rem 1rem;
+      background: var(--bg);
+      border-radius: 8px;
+      border: 1.5px solid transparent;
+      transition: border-color .2s;
+    }
+    .project-row:hover { border-color: var(--border); }
+
+    .project-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 6px;
+      object-fit: cover;
+      background: #C8D3E0;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-size: 1.1rem;
+      overflow: hidden;
+    }
+    .project-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .project-info { flex: 1; min-width: 0; }
+    .project-info .title {
+      font-weight: 600;
+      font-size: .9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .project-info .meta { font-size: .75rem; color: var(--muted); margin-top: .15rem; }
+
+    .cat-badge {
+      font-size: .65rem;
+      font-weight: 700;
+      padding: .2rem .55rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      white-space: nowrap;
+      background: #E8EEF7;
+      color: var(--navy);
+    }
+
+    .project-actions { display: flex; gap: .4rem; flex-shrink: 0; }
+
+    /* ── Empty state ── */
+    .empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+    }
+    .empty .icon { font-size: 3rem; margin-bottom: .75rem; opacity: .3; }
+
+    /* ── Image preview ── */
+    #imgPreview {
+      margin-top: .5rem;
+      border-radius: 7px;
+      max-height: 120px;
+      width: 100%;
+      object-fit: cover;
+      display: none;
+      border: 1.5px solid var(--border);
+    }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: var(--navy);
+      color: #fff;
+      padding: .75rem 1.25rem;
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all .3s ease;
+      z-index: 9999;
+      max-width: 320px;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast.success { background: var(--green); }
+    #toast.error   { background: var(--red); }
+
+    /* ── Instructions ── */
+    .instructions {
+      background: #EFF6FF;
+      border: 1.5px solid #BFDBFE;
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .instructions h3 { font-size: .95rem; color: var(--navy); margin-bottom: .75rem; }
+    .instructions ol { padding-left: 1.25rem; }
+    .instructions li { font-size: .85rem; line-height: 1.7; color: #1E40AF; margin-bottom: .2rem; }
+    .instructions li strong { color: var(--navy); }
+
+    /* ── Search ── */
+    .search-wrap { position: relative; margin-bottom: 1rem; }
+    .search-wrap input { padding-left: 2.25rem; }
+    .search-wrap .icon {
+      position: absolute;
+      left: .75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1.5px solid var(--bg); margin: 1rem 0; }
+
+    /* ── Count line ── */
+    .count-line {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-bottom: .75rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="header">
+  <h1>&#9998; <span>Latimtech</span> Project Manager</h1>
+  <div class="header-links">
+    <a href="portfolio.html" target="_blank">&#128065; View Portfolio</a>
+    <a href="index.html" target="_blank">&#127968; Main Site</a>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- ════════════════════════════════════════
+       LEFT — Project List
+  ════════════════════════════════════════ -->
+  <div>
+    <!-- Action bar -->
+    <div class="action-bar">
+      <button class="btn btn-navy" onclick="saveFile()">&#128190; Save projects.json</button>
+      <button class="btn btn-outline" onclick="downloadJSON()">&#8681; Download JSON</button>
+      <button class="btn btn-outline" onclick="loadFromFile()">&#128194; Load from File</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        All Projects
+        <span class="badge" id="projectCount">0</span>
+      </div>
+
+      <!-- Search -->
+      <div class="search-wrap">
+        <span class="icon">&#128269;</span>
+        <input type="text" id="searchInput" placeholder="Search by title or category…" oninput="renderList()">
+      </div>
+
+      <p class="count-line" id="countLine"></p>
+
+      <!-- List -->
+      <div class="project-list" id="projectList">
+        <div class="empty">
+          <div class="icon">&#128247;</div>
+          <p>No projects yet. Add one using the form.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions">
+      <h3>&#128218; How to add a new project (no coding needed)</h3>
+      <ol>
+        <li>Copy your project photo into the <strong>images/</strong> folder inside the website folder.</li>
+        <li>Fill in the form on the right — title, category, image filename (e.g. <strong>images/myproject.jpg</strong>), and a short description.</li>
+        <li>Click <strong>Add Project</strong>.</li>
+        <li>Click <strong>Save projects.json</strong> (Chrome/Edge will save it directly). If that doesn't work, click <strong>Download JSON</strong> and replace the <strong>projects.json</strong> file in your website folder with the downloaded file.</li>
+        <li>Refresh the portfolio page — your project will appear automatically.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       RIGHT — Add / Edit Form
+  ════════════════════════════════════════ -->
+  <div>
+    <div class="card" id="formCard">
+      <div class="card-title" id="formTitle">&#10133; Add New Project</div>
+
+      <input type="hidden" id="editId">
+
+      <div class="form-group">
+        <label>Project Title *</label>
+        <input type="text" id="fTitle" placeholder="e.g. Luxury Bathroom — Kampala" maxlength="100">
+      </div>
+
+      <div class="form-group">
+        <label>Category *</label>
+        <select id="fCategory">
+          <option value="">— Select category —</option>
+          <option value="spa">Spa &amp; Jacuzzi</option>
+          <option value="bathroom">Bathroom Installations</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="water">Water Engineering</option>
+          <option value="civil">Civil Engineering</option>
+          <option value="cctv">CCTV</option>
+          <option value="fabrication">Aluminium Fabrication</option>
+          <option value="ac">Air Conditioning</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Image Path</label>
+        <input type="text" id="fImage" placeholder="images/myproject.jpg" oninput="previewImage()">
+        <img id="imgPreview" alt="Preview">
+        <p style="font-size:.75rem;color:#6B7280;margin-top:.35rem;">
+          Leave blank to show a category icon instead.
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>Description <span style="font-weight:400;text-transform:none;letter-spacing:0;">(shown on hover)</span></label>
+        <textarea id="fDesc" placeholder="e.g. Frameless shower with freestanding bath — Jinja" maxlength="120"></textarea>
+      </div>
+
+      <button class="btn btn-primary btn-full" onclick="submitForm()">
+        &#10133; Add Project
+      </button>
+      <div id="cancelWrap" style="display:none;margin-top:.5rem;">
+        <button class="btn btn-outline btn-full" onclick="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- JSON Preview -->
+    <div class="card" style="margin-top:1.5rem;">
+      <div class="card-title">&#128196; Generated JSON <span style="font-weight:400;font-size:.8rem;color:var(--muted);">(read-only preview)</span></div>
+      <textarea id="jsonPreview" readonly
+        style="font-family:monospace;font-size:.75rem;min-height:180px;background:#F8F9FA;color:#333;resize:vertical;"></textarea>
+      <button class="btn btn-outline btn-full" style="margin-top:.75rem;" onclick="copyJSON()">
+        &#128203; Copy JSON
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- Hidden file input for loading JSON -->
+<input type="file" id="fileInput" accept=".json" style="display:none" onchange="handleFileLoad(event)">
+
+<script>
+/* ══════════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════════ */
+let projects = [];
+const STORAGE_KEY = 'latimtech_projects_v2';
+
+/* ══════════════════════════════════════════════════════
+   BOOT — load from localStorage, then try projects.json
+══════════════════════════════════════════════════════ */
+async function boot() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    try { projects = JSON.parse(stored); } catch(e) { projects = []; }
+    renderList();
+    updatePreview();
+    return;
+  }
+  // First ever visit — seed from projects.json
+  try {
+    const res = await fetch('projects.json');
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+    projects = data.projects || [];
+    persist();
+  } catch(e) {
+    projects = [];
+  }
+  renderList();
+  updatePreview();
+}
+
+/* ══════════════════════════════════════════════════════
+   PERSIST
+══════════════════════════════════════════════════════ */
+function persist() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+}
+
+/* ══════════════════════════════════════════════════════
+   RENDER LIST
+══════════════════════════════════════════════════════ */
+function renderList() {
+  const list  = document.getElementById('projectList');
+  const query = document.getElementById('searchInput').value.toLowerCase().trim();
+
+  const filtered = projects.filter(p =>
+    !query ||
+    p.title.toLowerCase().includes(query) ||
+    p.category.toLowerCase().includes(query) ||
+    (p.description || '').toLowerCase().includes(query)
+  );
+
+  document.getElementById('projectCount').textContent = projects.length;
+  document.getElementById('countLine').textContent =
+    query ? `Showing ${filtered.length} of ${projects.length} projects` : `${projects.length} project${projects.length !== 1 ? 's' : ''}`;
+
+  if (filtered.length === 0) {
+    list.innerHTML = `<div class="empty"><div class="icon">&#128247;</div><p>${query ? 'No matches found.' : 'No projects yet. Add one using the form.'}</p></div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(p => {
+    const thumb = p.image
+      ? `<div class="project-thumb"><img src="${esc(p.image)}" alt="" onerror="this.parentElement.innerHTML='📷';"></div>`
+      : `<div class="project-thumb">&#128247;</div>`;
+    return `
+      <div class="project-row" id="row-${p.id}">
+        ${thumb}
+        <div class="project-info">
+          <div class="title">${esc(p.title)}</div>
+          <div class="meta">${esc(p.description || '—')}</div>
+        </div>
+        <span class="cat-badge">${esc(p.category)}</span>
+        <div class="project-actions">
+          <button class="btn btn-outline btn-sm" onclick="editProject(${p.id})" title="Edit">&#9998;</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteProject(${p.id})" title="Delete">&#10005;</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* ══════════════════════════════════════════════════════
+   FORM — ADD / EDIT
+══════════════════════════════════════════════════════ */
+function submitForm() {
+  const title    = document.getElementById('fTitle').value.trim();
+  const category = document.getElementById('fCategory').value;
+  const image    = document.getElementById('fImage').value.trim();
+  const desc     = document.getElementById('fDesc').value.trim();
+  const editId   = document.getElementById('editId').value;
+
+  // Validation
+  let valid = true;
+  ['fTitle', 'fCategory'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('error');
+    if (!el.value.trim()) { el.classList.add('error'); valid = false; }
+  });
+  if (!valid) { showToast('Please fill in the required fields.', 'error'); return; }
+
+  if (editId) {
+    // Update existing
+    const idx = projects.findIndex(p => p.id == editId);
+    if (idx > -1) {
+      projects[idx] = { id: projects[idx].id, title, category, image, description: desc };
+    }
+    cancelEdit();
+    showToast('Project updated!', 'success');
+  } else {
+    // Add new
+    const id = Date.now();
+    projects.push({ id, title, category, image, description: desc });
+    clearForm();
+    showToast('Project added!', 'success');
+  }
+
+  persist();
+  renderList();
+  updatePreview();
+}
+
+function editProject(id) {
+  const p = projects.find(p => p.id === id);
+  if (!p) return;
+  document.getElementById('editId').value    = p.id;
+  document.getElementById('fTitle').value    = p.title;
+  document.getElementById('fCategory').value = p.category;
+  document.getElementById('fImage').value    = p.image || '';
+  document.getElementById('fDesc').value     = p.description || '';
+  document.getElementById('formTitle').textContent = '✏️ Edit Project';
+  document.getElementById('cancelWrap').style.display = '';
+  document.querySelector('[onclick="submitForm()"]').textContent = '💾 Save Changes';
+  previewImage();
+  document.getElementById('formCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function cancelEdit() {
+  clearForm();
+  document.getElementById('editId').value = '';
+  document.getElementById('formTitle').innerHTML = '&#10133; Add New Project';
+  document.getElementById('cancelWrap').style.display = 'none';
+  document.querySelector('[onclick="submitForm()"]').innerHTML = '&#10133; Add Project';
+}
+
+function clearForm() {
+  ['fTitle', 'fCategory', 'fImage', 'fDesc'].forEach(id => {
+    document.getElementById(id).value = '';
+    document.getElementById(id).classList.remove('error');
+  });
+  document.getElementById('imgPreview').style.display = 'none';
+}
+
+function deleteProject(id) {
+  if (!confirm('Delete this project?')) return;
+  projects = projects.filter(p => p.id !== id);
+  persist();
+  renderList();
+  updatePreview();
+  showToast('Project deleted.', 'success');
+}
+
+/* ══════════════════════════════════════════════════════
+   IMAGE PREVIEW
+══════════════════════════════════════════════════════ */
+function previewImage() {
+  const src = document.getElementById('fImage').value.trim();
+  const img = document.getElementById('imgPreview');
+  if (src) {
+    img.src = src;
+    img.style.display = 'block';
+    img.onerror = () => { img.style.display = 'none'; };
+    img.onload  = () => { img.style.display = 'block'; };
+  } else {
+    img.style.display = 'none';
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   JSON PREVIEW
+══════════════════════════════════════════════════════ */
+function updatePreview() {
+  document.getElementById('jsonPreview').value = JSON.stringify({ projects }, null, 2);
+}
+
+/* ══════════════════════════════════════════════════════
+   SAVE — File System Access API (Chrome/Edge direct save)
+══════════════════════════════════════════════════════ */
+async function saveFile() {
+  if (!('showSaveFilePicker' in window)) {
+    downloadJSON();
+    showToast('Saved as download (File System API not supported in this browser).', '');
+    return;
+  }
+  try {
+    const handle = await window.showSaveFilePicker({
+      suggestedName: 'projects.json',
+      types: [{ description: 'JSON File', accept: { 'application/json': ['.json'] } }],
+    });
+    const writable = await handle.createWritable();
+    await writable.write(JSON.stringify({ projects }, null, 2));
+    await writable.close();
+    showToast('projects.json saved successfully!', 'success');
+  } catch (e) {
+    if (e.name !== 'AbortError') {
+      downloadJSON();
+      showToast('Saved as download instead.', '');
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   DOWNLOAD — always-available fallback
+══════════════════════════════════════════════════════ */
+function downloadJSON() {
+  const blob = new Blob([JSON.stringify({ projects }, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'projects.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('projects.json downloaded! Replace the file in your website folder.', '');
+}
+
+/* ══════════════════════════════════════════════════════
+   LOAD FROM FILE — import an existing projects.json
+══════════════════════════════════════════════════════ */
+function loadFromFile() {
+  document.getElementById('fileInput').click();
+}
+function handleFileLoad(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      projects = data.projects || [];
+      persist();
+      renderList();
+      updatePreview();
+      showToast(`Loaded ${projects.length} projects from file.`, 'success');
+    } catch(err) {
+      showToast('Invalid JSON file.', 'error');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+/* ══════════════════════════════════════════════════════
+   COPY JSON
+══════════════════════════════════════════════════════ */
+function copyJSON() {
+  const text = document.getElementById('jsonPreview').value;
+  navigator.clipboard.writeText(text)
+    .then(() => showToast('JSON copied to clipboard!', 'success'))
+    .catch(() => {
+      document.getElementById('jsonPreview').select();
+      document.execCommand('copy');
+      showToast('JSON copied!', 'success');
+    });
+}
+
+/* ══════════════════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════════════════ */
+let toastTimer;
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show' + (type ? ' ' + type : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.className = ''; }, 3200);
+}
+
+/* ══════════════════════════════════════════════════════
+   ESCAPE HTML
+══════════════════════════════════════════════════════ */
+function esc(str) {
+  return String(str || '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+/* ── Start ── */
+boot();
+</script>
+</body>
+</html>
