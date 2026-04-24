@@ -204,20 +204,6 @@
       "description": "CCTV Installation"
     },
     {
-      "id": 31,
-      "title": "Aluminium Window & Glass System",
-      "category": "fabrication",
-      "image": "images/almuniamgglass.jpeg",
-      "description": "Aluminium Fabrication"
-    },
-    {
-      "id": 32,
-      "title": "Multi-Split AC System — Office Block",
-      "category": "ac",
-      "image": "images/ac.jpeg",
-      "description": "Air Conditioning"
-    },
-    {
       "id": 1776951232881,
       "title": "Residential Complex — Jinja City",
       "category": "civil",
