@@ -1,0 +1,13 @@
+# Sanity Studio — has its own repo and node_modules, deploy separately with: cd studio && npm run deploy
+studio/
+
+# Empty folders
+New folder/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log

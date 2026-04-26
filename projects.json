@@ -204,6 +204,23 @@
       "description": "CCTV Installation"
     },
     {
+<<<<<<< HEAD
+=======
+      "id": 31,
+      "title": "Aluminium Window & Glass System",
+      "category": "fabrication",
+      "image": "images/almuniamgGlass.jpeg",
+      "description": "Aluminium Fabrication"
+    },
+    {
+      "id": 32,
+      "title": "Multi-Split AC System — Office Block",
+      "category": "ac",
+      "image": "images/AC.jpeg",
+      "description": "Air Conditioning"
+    },
+    {
+>>>>>>> a7e4f01 (Initial commit — Latimtech website with Sanity CMS)
       "id": 1776951232881,
       "title": "Residential Complex — Jinja City",
       "category": "civil",
