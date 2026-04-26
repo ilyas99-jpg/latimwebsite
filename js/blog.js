@@ -134,6 +134,10 @@
     const tagsEl = (post.tags || []).map(t => `<span class="blog-tag">${esc(t)}</span>`).join('');
 
     document.title = `${post.title} — Latimtech Life & Light Ltd`;
+    const heroTitle   = document.getElementById('hero-title');
+    const heroHeading = document.getElementById('hero-heading');
+    if (heroTitle)   heroTitle.textContent   = post.title;
+    if (heroHeading) heroHeading.textContent = post.title;
 
     container.innerHTML = `
       <article class="blog-post-article">
