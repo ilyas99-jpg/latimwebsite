@@ -1,13 +1,7 @@
 /* ============================================================
-<<<<<<< HEAD
    LATIMTECH CMS — Portfolio Loader
    Fetches projects.json and renders portfolio grid dynamically.
    Falls back to hardcoded HTML if fetch fails (e.g. file://).
-=======
-   LATIMTECH CMS — Portfolio Loader (Sanity-powered)
-   Fetches projects from Sanity CDN and renders the portfolio grid.
-   Requires js/sanity-config.js to be loaded first.
->>>>>>> a7e4f01 (Initial commit — Latimtech website with Sanity CMS)
    ============================================================ */
 
 (async function () {
@@ -31,28 +25,12 @@
     return d.innerHTML;
   }
 
-<<<<<<< HEAD
   function buildCard(p) {
     const meta = CATEGORY_META[p.category] || { label: p.category, icon: 'fas fa-star', bg: '#1A365D' };
     const hasImage = p.image && p.image.trim() !== '';
 
     const inner = hasImage
       ? `<img src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy">`
-=======
-  function getImageSrc(p) {
-    if (p.image && p.image.asset) return sanityImageUrl(p.image.asset, 800);
-    if (p.legacyImagePath && p.legacyImagePath.trim()) return p.legacyImagePath;
-    return null;
-  }
-
-  function buildCard(p) {
-    const meta    = CATEGORY_META[p.category] || { label: p.category, icon: 'fas fa-star', bg: '#1A365D' };
-    const imgSrc  = getImageSrc(p);
-    const hasImage = !!imgSrc;
-
-    const inner = hasImage
-      ? `<img src="${esc(imgSrc)}" alt="${esc(p.title)}" loading="lazy" width="800" height="600">`
->>>>>>> a7e4f01 (Initial commit — Latimtech website with Sanity CMS)
       : `<div class="portfolio-thumb" style="background:${meta.bg};width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;">
            <i class="${meta.icon}" style="font-size:2.5rem;color:#D4A574;opacity:.7;"></i>
            <span class="pl" style="font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);">${esc(meta.label)}</span>
@@ -88,13 +66,9 @@
   function rewireFilter(items) {
     const btns = document.querySelectorAll('.filter-btn');
     if (!btns.length) return;
-<<<<<<< HEAD
     btns.forEach(btn => {
       btn.replaceWith(btn.cloneNode(true)); // remove old listeners
     });
-=======
-    btns.forEach(btn => btn.replaceWith(btn.cloneNode(true)));
->>>>>>> a7e4f01 (Initial commit — Latimtech website with Sanity CMS)
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -117,18 +91,11 @@
   }
 
   try {
-<<<<<<< HEAD
     const res = await fetch('projects.json');
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     const projects = (data.projects || []);
     if (projects.length === 0) return;
-=======
-    const projects = await sanityFetch(
-      '*[_type == "project"] | order(order asc, _createdAt asc) { title, category, description, order, image { asset }, legacyImagePath }'
-    );
-    if (!projects || projects.length === 0) return;
->>>>>>> a7e4f01 (Initial commit — Latimtech website with Sanity CMS)
 
     grid.innerHTML = projects.map(buildCard).join('');
 
