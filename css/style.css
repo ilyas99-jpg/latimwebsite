@@ -707,6 +707,7 @@ img { max-width:100%; height:auto; display:block; }
   .nav-logo-img   { height:38px; }
   .nav-logo-text .name { font-size:1rem; }
   .nav-logo-text .tag  { display:none; }
+  .header { background: var(--primary-dark); box-shadow: 0 2px 20px rgba(0,0,0,.3); }
   .about-badge    { position:static; margin-top:1rem; display:inline-block; }
   .about-visual   { text-align:center; overflow:visible; }
   .testimonial-inner blockquote { font-size:1rem; }
