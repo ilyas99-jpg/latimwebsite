@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="images/icon.png" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Latimtech Life & Light Ltd — Uganda's Premier Engineering Firm</title>
   <meta name="description" content="Latimtech Life & Light Ltd — Construction, Civil Engineering, Plumbing, Electrical, Water Systems, CCTV, AC, Welding, Luxury Bathrooms & Spa. Jinja, Uganda." />
@@ -14,14 +13,6 @@
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" /></noscript>
   <link rel="stylesheet" href="css/style.css" />
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TPHFS1VP4R"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-TPHFS1VP4R');
-  </script>
 </head>
 <body>
 
@@ -40,7 +31,6 @@
       <a href="about.html">About</a>
       <a href="services.html">Services</a>
       <a href="portfolio.html">Portfolio</a>
-      <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
       <a href="contact.html" class="nav-cta">Get Quote</a>
     </div>
@@ -53,7 +43,6 @@
     <a href="about.html">About Us</a>
     <a href="services.html">Services</a>
     <a href="portfolio.html">Portfolio</a>
-    <a href="blog.html">Blog</a>
     <a href="contact.html">Contact Us</a>
     <a href="contact.html" class="mobile-cta">Get Free Quote</a>
   </div>
@@ -61,6 +50,25 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="hero">
+  <div class="hero-slides" aria-hidden="true">
+    <div class="hero-slide active" style="background-image:url('images/bathroom-shower-bath-1.jpg')"></div>
+    <div class="hero-slide"        style="background-image:url('images/water-fillters.jpeg')"></div>
+    <div class="hero-slide"        style="background-image:url('images/white-luxurywashroom.jpeg')"></div>
+    <div class="hero-slide"        style="background-image:url('images/luxury-toilet.jpeg')"></div>
+    <!-- Video slide 1: place your video at videos/hero-video-1.mp4 -->
+    <div class="hero-slide hero-slide--video">
+      <video muted playsinline loop poster="images/water-fire-pumps.jpg">
+        <source src="videos/hero-video-1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <!-- Video slide 2: place your video at videos/hero-video-2.mp4 -->
+    <div class="hero-slide hero-slide--video">
+      <video muted playsinline loop poster="images/solar-chloride-install.jpg">
+        <source src="videos/water-f.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-pattern"></div>
   <div class="hero-orb"></div>
   <div class="hero-orb-2"></div>
@@ -69,10 +77,9 @@
       <i class="fas fa-star"></i> Uganda Golden Age Era Builders
     </div>
     <h1 class="fade-in delay-2">
-      Tasking Tasks with <span>Experience</span> —<br>Uganda's Premier Engineering Specialists
-    </h1>
+      Engineering <span>Excellence</span> Built in Uganda
     <p class="hero-sub fade-in delay-4">
-      Building A Better Tomorrow by UGANDANS. World-class civil engineering, luxury installations, and technical services delivered with local pride and expertise.
+      World-class civil engineering and luxury installations delivered with local pride.
     </p>
     <div class="hero-actions fade-in delay-6">
       <a href="contact.html" class="btn btn-primary"><i class="fas fa-comments"></i> Get Free Consultation</a>
@@ -101,6 +108,20 @@
   <div class="hero-scroll">
     <span>Scroll</span>
     <i class="fas fa-chevron-down"></i>
+  </div>
+  <button class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous slide">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  <button class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next slide">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+  <div class="hero-dots" id="heroDots">
+    <button class="hero-dot active" data-index="0" aria-label="Slide 1"></button>
+    <button class="hero-dot"        data-index="1" aria-label="Slide 2"></button>
+    <button class="hero-dot"        data-index="2" aria-label="Slide 3"></button>
+    <button class="hero-dot"        data-index="3" aria-label="Slide 4"></button>
+    <button class="hero-dot"        data-index="4" aria-label="Slide 5"></button>
+    <button class="hero-dot"        data-index="5" aria-label="Slide 6"></button>
   </div>
 </section>
 
@@ -474,6 +495,7 @@
 </footer>
 
 <script src="js/main.js" defer></script>
+
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -487,5 +509,10 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+
+<!-- ===== WHATSAPP FLOAT ===== -->
+<a href="https://wa.me/256774428310" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
 </body>
 </html>

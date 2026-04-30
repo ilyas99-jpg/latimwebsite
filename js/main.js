@@ -186,4 +186,58 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* --- Hero Image Slideshow -------------------------------- */
+  (function () {
+    const slides  = document.querySelectorAll('.hero-slide');
+    const dots    = document.querySelectorAll('.hero-dot');
+    const prevBtn = document.getElementById('heroPrev');
+    const nextBtn = document.getElementById('heroNext');
+    const hero    = document.getElementById('hero');
+    if (!slides.length) return;
+
+    let current = 0, paused = false, timer = null;
+    const DELAY = 5000, TOTAL = slides.length;
+
+    function videoOf(slide) { return slide.querySelector('video'); }
+
+    function goTo(idx) {
+      idx = (idx + TOTAL) % TOTAL;
+
+      // Deactivate outgoing slide
+      const outgoing = slides[current];
+      outgoing.classList.remove('active');
+      dots[current].classList.remove('active');
+      dots[current].setAttribute('aria-selected', 'false');
+      const outVid = videoOf(outgoing);
+      if (outVid) { outVid.pause(); outVid.currentTime = 0; }
+
+      // Activate incoming slide
+      current = idx;
+      const incoming = slides[current];
+      incoming.classList.add('active');
+      dots[current].classList.add('active');
+      dots[current].setAttribute('aria-selected', 'true');
+      const inVid = videoOf(incoming);
+      if (inVid) { inVid.play().catch(() => {}); }
+    }
+    function startTimer()   { stopTimer(); timer = setInterval(() => { if (!paused) goTo(current + 1); }, DELAY); }
+    function stopTimer()    { if (timer) { clearInterval(timer); timer = null; } }
+    function restartTimer() { stopTimer(); startTimer(); }
+
+    hero.addEventListener('mouseenter', () => { paused = true; });
+    hero.addEventListener('mouseleave', () => { paused = false; });
+    prevBtn.addEventListener('click', () => { goTo(current - 1); restartTimer(); });
+    nextBtn.addEventListener('click', () => { goTo(current + 1); restartTimer(); });
+    dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.index); restartTimer(); }));
+
+    let tx = 0;
+    hero.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; }, { passive: true });
+    hero.addEventListener('touchend',   e => {
+      const delta = e.changedTouches[0].clientX - tx;
+      if (Math.abs(delta) > 50) { delta < 0 ? goTo(current + 1) : goTo(current - 1); restartTimer(); }
+    }, { passive: true });
+
+    startTimer();
+  }());
+
 });
